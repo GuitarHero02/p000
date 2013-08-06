@@ -11,6 +11,8 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
+	<mvc:default-servlet-handler/>
+	
 	<mvc:annotation-driven/>
 	
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
