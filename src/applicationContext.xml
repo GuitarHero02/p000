@@ -32,9 +32,9 @@
 	</context:component-scan>
 	
 	<jdbc:embedded-database id="dataSource" type="HSQL">
-		<!-- <jdbc:script location="classpath:/script/BoardSchema.sql" /> -->
+		<jdbc:script location="classpath:/script/BoardSchema.sql" />
 		<jdbc:script location="classpath:/script/MemberSchema.sql" />
-		<!--<jdbc:script location="classpath:/script/BoardData.sql" /> -->
+		<jdbc:script location="classpath:/script/BoardData.sql" />
 	</jdbc:embedded-database>
 	
 	<tx:annotation-driven/>

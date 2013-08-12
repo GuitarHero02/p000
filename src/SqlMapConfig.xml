@@ -6,4 +6,6 @@
 <sqlMapConfig>
 	<settings useStatementNamespaces="true" />
 	<sqlMap resource="com/p000/persistance/ibatis/Member.xml" />
+	<sqlMap resource="com/p000/persistance/ibatis/Board.xml" />
 </sqlMapConfig>
+

@@ -35,10 +35,10 @@ function fnWrite() {
 				<th>조회수</th>
 			</tr>
 			</thead>
-<c:forEach var="board" items="${boardList}" varStatus="loop">
+<c:forEach var="board" items="${list}" varStatus="loop">
 			<tr>
 				<td>${board.seq}</td>
-				<td><a href="<c:url value="/board/read/${board.seq}" />">${board.title}</a></td>
+				<td><a href="<c:url value="/board/view/${board.seq}" />">${board.title}</a></td>
 				<td>${board.writer}</td>
 				<td>${board.regDate}</td>
 				<td>${board.cnt}</td>
