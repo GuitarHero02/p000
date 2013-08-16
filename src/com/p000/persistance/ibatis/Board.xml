@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Board">
+	<typeAlias alias="Board" type="com.p000.model.BoardVO" />
+	<delete id="delete" parameterClass="int">
+		delete from CENTER_BOARD where seq = #seq#
+	</delete>
+
+	<insert id="insert" parameterClass="Board">
+		insert into CENTER_BOARD (seq, title, content, writer, password, regDate, cnt) 
+							values(null, #title#, #content#,#writer#, #password#, SYSDATE, 0)
+ 	</insert>
+ 	
+	<update id="update" parameterClass="Board">
+		update CENTER_BOARD set title = #title#, content = #content# where seq = #seq#
+	</update>
+ 	 
+	<update id="updateCnt" parameterClass="int">
+		update CENTER_BOARD set cnt = cnt+1 where seq = #seq#
+	</update>
+	<select id="view" parameterClass="int" resultClass="Board">
+		select * from CENTER_BOARD where seq = #seq#
+ 	</select>
+
+	<select id="list" resultClass="Board">
+		select * from CENTER_BOARD order by seq
+ 	</select>
+</sqlMap>

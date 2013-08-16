@@ -30,7 +30,8 @@ public class BoardDaoIbatis implements BoardDAO {
 
 	@Override
 	public int delete(int seq) {
-		return sqlMapClientTemplate.update("Board.delete", seq);
+		System.out.println("삭제까지");
+		return sqlMapClientTemplate.delete("Board.delete", seq);
 	}
 
 	@Override

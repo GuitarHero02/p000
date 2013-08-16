@@ -57,11 +57,18 @@ public class BoardController {
 		}
 	}
 	
-	// /board/delete/1
-	@RequestMapping(value="/delete/{seq}")
-	public String delete(@PathVariable String boardName, @PathVariable int seq) {
-		boardService.delete(seq);
-		return "redirect:/"+boardName + "/list";
+	// /board/delete/
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public String delete(@PathVariable String boardName, @ModelAttribute BoardVO boardVO
+			, @RequestParam String pwd, ModelMap model, SessionStatus sessionStatus) {
+		System.out.println("delete param : " + boardVO.getSeq());
+		if(boardVO.getPassword().equals(pwd)) {
+			boardService.delete(boardVO.getSeq());
+			return "redirect:/"+boardName + "/list";
+		}
+		
+		model.addAttribute("msg", "비밀번호가 다릅니다.");
+		return "/"+boardName + "/update";	
 	}
 	
 	// /board/edit/1
