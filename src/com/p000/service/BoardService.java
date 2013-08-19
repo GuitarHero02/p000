@@ -17,5 +17,7 @@ public interface BoardService {
 	void delete(int seq);
 
 	void update(BoardVO boardVO);
+
+	List<BoardVO> listBySearch(String keyword);
 	
 }

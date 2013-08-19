@@ -25,6 +25,10 @@ function fnWrite() {
 	<h1>Q&A게시판</h1>
 	<div class="row">
 		<div class="span9">
+		<form action="/board/search">
+			<input type="text" name="keyword"/>
+			<input type="submit" value="search">
+		</form>
 			<table class="table">
 			<thead>
 			<tr>

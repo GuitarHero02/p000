@@ -40,4 +40,9 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.update(boardVO);
 	}
 
+	@Override
+	public List<BoardVO> listBySearch(String keyword) {
+		return boardDAO.listBySearch(keyword);
+	}
+
 }

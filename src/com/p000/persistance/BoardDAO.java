@@ -17,4 +17,6 @@ public interface BoardDAO {
 	int update(BoardVO boardVO);
 
 	void write(BoardVO boardVO);
+
+	List<BoardVO> listBySearch(String keyword);
 }

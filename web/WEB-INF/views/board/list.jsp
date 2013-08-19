@@ -12,19 +12,65 @@
 <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet">
 <link href="<c:url value='/css/bootstrap-responsive.min.css' />" rel="stylesheet">
 <link href="<c:url value='/css/docs.css' />" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 <script type="text/javascript">
 <!--
 function fnWrite() {
 	window.location.href = "<c:url value='/board/write' />";	
 }
 //-->
-</script> 
+</script>
+<script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	    $( "#keyword" ).autocomplete({
+	        source: function( request, response ) {
+	          $.ajax({
+	            url: "/board/list.json",
+	            dataType: "json",
+	            data: {
+	            	keyword:$( "#keyword" ).val()
+	            },
+	            success: function( data ) {
+	            	var items = [];
+	            	$.each(data.boardList, function(index, value) {
+	            		  items.push(value.title);
+	            		});
+	              response( $.map( items, function( item ) {
+	                return [item]
+	              }));
+	            }
+	          });
+	        },
+	        minLength: 2,
+	        delimiter: /(,|;)\s*/, // regex or character
+	        maxHeight:400,
+	        width:300,
+	        zIndex: 9999,
+	        deferRequestBy: 0 //miliseconds
+	    });
+	});
+</script>
+<style>
+/* city Search Loading by Justin 2013.04.02 */
+.ui-autocomplete-loading
+{
+        background: white url('http://www.goodkiss.co.kr/img/waiting.gif') right center no-repeat;
+}
+</style>
+
 </head>
 <body>
 <div class="bs-docs-grid">
 	<h1>목록</h1>
 	<div class="row">
 		<div class="span9">
+		<form action="/board/search">
+			<input type="text" id="keyword" name="keyword"/>
+			<input type="submit" value="search">
+		</form>
 			<table class="table">
 			<thead>
 			<tr>

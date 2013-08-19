@@ -1,8 +1,12 @@
 package com.p000.controller;
 
+import java.util.ArrayList;
+
 import javax.validation.Valid;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,10 +16,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-
+import com.p000.model.BoardList;
 import com.p000.model.BoardVO;
 import com.p000.service.BoardService;
 
@@ -29,6 +34,24 @@ public class BoardController {
 	@RequestMapping("/list")
 	public void list(@PathVariable String boardName, Model model){
 		model.addAttribute("list", boardService.list());
+	}
+	
+	@RequestMapping("/search")
+	public String search(@PathVariable String boardName, Model model, @RequestParam String keyword){
+		System.out.println("controller in:::::: "+ keyword);
+		model.addAttribute("list", boardService.listBySearch(keyword));
+		return "/"+boardName + "/list";
+	}
+	
+	@RequestMapping(value="/list.json", 
+			method = RequestMethod.GET ,
+			headers="Accept=application/json",
+			produces = {MediaType.APPLICATION_JSON_VALUE})
+	public @ResponseBody BoardList listJSON(@PathVariable String boardName, Model model, @RequestParam String keyword){
+
+		BoardList list = new BoardList();
+		list.setBoardList(boardService.listBySearch(keyword));
+		return list;
 	}
 	
 	// /board/view/1

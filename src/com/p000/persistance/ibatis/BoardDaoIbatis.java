@@ -44,4 +44,9 @@ public class BoardDaoIbatis implements BoardDAO {
 		sqlMapClientTemplate.update("Board.insert", boardVO);
 	}
 
+	@Override
+	public List<BoardVO> listBySearch(String keyword) {
+		return sqlMapClientTemplate.queryForList("Board.listBySearch", keyword);
+	}
+
 }

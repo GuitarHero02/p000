@@ -28,4 +28,8 @@
 	<select id="list" resultClass="Board">
 		select * from CENTER_BOARD order by seq
  	</select>
+ 	
+ 	<select id="listBySearch" resultClass="Board">
+		select * from CENTER_BOARD where title like '%'||#keyword#||'%' order by seq
+ 	</select>
 </sqlMap>
