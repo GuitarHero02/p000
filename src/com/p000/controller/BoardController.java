@@ -1,11 +1,16 @@
 package com.p000.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.p000.model.BoardList;
 import com.p000.model.BoardVO;
+import com.p000.model.FileUploadVO;
 import com.p000.service.BoardService;
 
 @Controller
@@ -30,6 +37,7 @@ import com.p000.service.BoardService;
 public class BoardController {
 	
 	@Autowired BoardService boardService;
+	@Autowired private FileSystemResource fsResource;
 	
 	@RequestMapping("/list")
 	public void list(@PathVariable String boardName, Model model){
@@ -71,11 +79,37 @@ public class BoardController {
 	
 	// /board/write
 	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public String write(@PathVariable String boardName, @Valid @ModelAttribute BoardVO boardVO, BindingResult result) {
+	public String write(@PathVariable String boardName, @Valid @ModelAttribute BoardVO boardVO, BindingResult result) throws IOException {
 		if(result.hasErrors()) {
 			return "/"+boardName + "/write";
 		} else {
 			boardService.write(boardVO);
+			if(boardVO.getFiles()!=null){
+				List<MultipartFile> files = boardVO.getFiles();
+				List<String> fileNames = new ArrayList<String>();
+				
+				if(null != files && files.size() > 0) {
+					for (MultipartFile multipartFile : files) {
+	
+						String fileName = multipartFile.getOriginalFilename();
+						byte[] bytes = multipartFile.getBytes();
+						
+						fileNames.add(fileName);
+						
+						
+						//Handle file content - multipartFile.getInputStream()
+						try{
+							File outFileName = new File(fsResource.getPath()+File.separator+fileName);
+							FileOutputStream fileoutputStream = new FileOutputStream(outFileName);
+							fileoutputStream.write(bytes);
+							fileoutputStream.close();
+						}catch(IOException ie){
+							System.out.println("file writing error");
+						}
+						System.out.println("file upload success");
+					}
+				}
+			}
 			return "redirect:/"+boardName + "/list";
 		}
 	}

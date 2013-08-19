@@ -37,6 +37,10 @@
 				<td>${boardVO.regDate}</td>
 			</tr>
 			<tr>
+				<th>파일</th>
+				<td>${boardVO.files.size()}</td>
+			</tr>
+			<tr>
 				<th>조회수</th>
 				<td>${boardVO.cnt}</td>
 			</tr>

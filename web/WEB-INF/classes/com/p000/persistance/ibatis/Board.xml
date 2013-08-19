@@ -5,24 +5,31 @@
 
 <sqlMap namespace="Board">
 	<typeAlias alias="Board" type="com.p000.model.BoardVO" />
-<!-- 
 	<delete id="delete" parameterClass="int">
-		delete from member where id = #id#
+		delete from CENTER_BOARD where seq = #seq#
 	</delete>
 
-	<insert id="add" parameterClass="Member">
-		insert into member (id, name, joined) values(#id#, #name#, #joined#)
+	<insert id="insert" parameterClass="Board">
+		insert into CENTER_BOARD (seq, title, content, writer, password, regDate, cnt) 
+							values(null, #title#, #content#,#writer#, #password#, SYSDATE, 0)
  	</insert>
  	
-	<update id="update" parameterClass="Member">
-		update member set name = #name#, joined = #joined# where id = #id#
+	<update id="update" parameterClass="Board">
+		update CENTER_BOARD set title = #title#, content = #content# where seq = #seq#
 	</update>
- 	
-	<select id="get" parameterClass="int" resultClass="Member">
-		select * from member where id = #id#
+ 	 
+	<update id="updateCnt" parameterClass="int">
+		update CENTER_BOARD set cnt = cnt+1 where seq = #seq#
+	</update>
+	<select id="view" parameterClass="int" resultClass="Board">
+		select * from CENTER_BOARD where seq = #seq#
  	</select>
- -->
+
 	<select id="list" resultClass="Board">
 		select * from CENTER_BOARD order by seq
+ 	</select>
+ 	
+ 	<select id="listBySearch" resultClass="Board">
+		select * from CENTER_BOARD where title like '%'||#keyword#||'%' order by seq
  	</select>
 </sqlMap>

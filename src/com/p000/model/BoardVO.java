@@ -1,8 +1,10 @@
 package com.p000.model;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 public class BoardVO {
 	private int seq;
@@ -18,6 +20,8 @@ public class BoardVO {
 	
 	@NotEmpty()
 	private String password;
+	
+	private List<MultipartFile> files;
 	
 	private Date regDate;	
 
@@ -77,5 +81,13 @@ public class BoardVO {
 
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
+	}
+
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
 	}
 }
