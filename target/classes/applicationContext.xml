@@ -30,7 +30,7 @@
 	<context:component-scan base-package="com.p000">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>	
 	</context:component-scan>
-	
+	<!-- 
 	<jdbc:embedded-database id="dataSource" type="HSQL">
 		<jdbc:script location="classpath:/script/BoardSchema.sql" />
 		<jdbc:script location="classpath:/script/MemberSchema.sql" />
@@ -50,5 +50,25 @@
 	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
 		<constructor-arg name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
-
+	-->
+	
+	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+		<property name="driver" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/test"/>
+		<property name="username" value="test"/>
+		<property name="password" value=""/>
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
 </beans>

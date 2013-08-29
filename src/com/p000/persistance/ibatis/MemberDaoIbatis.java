@@ -10,8 +10,8 @@ import com.p000.model.Member;
 import com.p000.persistance.MemberDao;
 
 @Repository /*hibernate설정시 주석처리해야 빈으로 등록되지 않음 */
-public class MemberDaoIbatis implements MemberDao {
-	
+public abstract class MemberDaoIbatis implements MemberDao {
+	/*
 	@Autowired SqlMapClientTemplate sqlMapClientTemplate;
 	
 	public void add(Member member) {
@@ -41,5 +41,5 @@ public class MemberDaoIbatis implements MemberDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+*/
 }

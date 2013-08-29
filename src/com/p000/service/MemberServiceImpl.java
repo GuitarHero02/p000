@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.p000.model.Member;
 import com.p000.persistance.MemberDao;
 
-@Service
-@Transactional
-public class MemberServiceImpl implements MemberService {
+//@Service
+//@Transactional
+public abstract class MemberServiceImpl implements MemberService {
 	
-	@Autowired MemberDao dao;
+	/*@Autowired MemberDao dao;
 
 	public void add(Member member) {
 		member.setJoined(new Date());
@@ -41,5 +41,5 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println(keyword + "  :  keyword in the service");
 		return dao.listByName(keyword);
 	}
-	
+	*/
 }

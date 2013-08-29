@@ -13,8 +13,9 @@
 <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet">
 <link href="<c:url value='/css/bootstrap-responsive.min.css' />" rel="stylesheet">
 <link href="<c:url value='/css/docs.css' />" rel="stylesheet">
+<script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
+$(function() {
 
 	$('#addFile').click(function() {
 		var fileIndex = $('#fileTable tr').children().length - 1;
@@ -26,7 +27,6 @@ $(document).ready(function() {
 	
 });
 </script>
-<script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
 </head>
 <body>
 <div class="bs-docs-grid">

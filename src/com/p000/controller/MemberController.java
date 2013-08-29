@@ -17,11 +17,11 @@ import com.p000.service.MemberService;
 
 import com.p000.model.Member;
 
-@Controller
-@RequestMapping("/member")
-@SessionAttributes("member")
+//@Controller
+//@RequestMapping("/member")
+//@SessionAttributes("member")
 public class MemberController {
-
+/*
 	@Autowired MemberService memberService;
 	
 	@RequestMapping("/list")
@@ -70,5 +70,5 @@ public class MemberController {
 		status.setComplete();
 		return "redirect:/member/list";
 	}
-	
+	*/
 }

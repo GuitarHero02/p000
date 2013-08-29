@@ -74,13 +74,12 @@ $(function() {
 			<table class="table">
 			<thead>
 			<tr>
-				<th>NO</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>비밀번호</th>
 			</tr>
 			</thead>
+			<!-- 
 <c:forEach var="board" items="${list}" varStatus="loop">
 			<tr>
 				<td>${board.seq}</td>
@@ -88,6 +87,14 @@ $(function() {
 				<td>${board.writer}</td>
 				<td>${board.regDate}</td>
 				<td>${board.cnt}</td>
+			</tr>
+</c:forEach>
+ -->
+<c:forEach var="board" items="${list}" varStatus="loop">
+			<tr>
+				<td>${board.id}</td>
+				<td><a href="<c:url value="/board/view/${board.id}" />">${board.name}</a></td>
+				<td>${board.password}</td>
 			</tr>
 </c:forEach>
 			</table>
